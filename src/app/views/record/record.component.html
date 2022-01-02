@@ -1,1 +1,101 @@
-<p>record works!</p>
+<div class="sub-page-title">Contribute Your Record</div>
+<div class="main-container">
+    <div class="box-inline">
+        <div class="left-section">
+            <ng-container *ngIf="!initialLoading">
+                <div class="label-font">
+                    Loading your location 
+                </div>
+                <div class="progress loop">
+                    <progress></progress>
+                </div>
+            </ng-container>
+            <div id="map" class="map" #mapElement></div>
+        </div>
+    
+        <div class="right-section">
+            <div>
+                <div class="label-font" style="margin-bottom: 30px;">Your current location: <span style="font-weight: bold;">{{record.location}}</span>
+                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; font-size: small;" (click)="getLocation()" [disabled]="!initialLoading"><span class="btn-font">Re-Locate <clr-icon shape="refresh"></clr-icon> </span></button>
+                </div>
+            </div>
+
+            <div class="label-font">If the above location is not correct, please update your location below</div>
+
+            <form clrForm clrLabelSize="4">
+                <clr-input-container>
+                    <label>Location:</label>
+                    <input clrInput name="location" [(ngModel)]="record.location" (change)="onLocationChange()" required/>
+                </clr-input-container>
+
+                <clr-select-container>
+                    <label>Duck Type:</label>
+                    <select clrSelect id="select-duck-type" name="duckType" [(ngModel)]="record.duckType" (change)="onDuckTypeChange()" required>
+                        <option *ngFor="let type of duckTypeList" [value]="type">
+                            {{ type }}
+                        </option>
+                    </select>
+                </clr-select-container>
+
+                <clr-input-container>
+                    <label>Duck Amount:</label>
+                    <input clrInput name="duckAmount" type="number" [(ngModel)]="record.duckAmount" (change)="onDuckAmountChange()" required/>
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Food Description:</label>
+                    <input clrInput name="food" size="50" [(ngModel)]="record.food" (change)="onFoodDescriptionChange()" required/>
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Food Amount:</label>
+                    <input clrInput name="foodAmount" type="number" [(ngModel)]="record.foodAmount" (change)="onFoodAmountChange()" required/>
+                </clr-input-container>
+
+                <clr-select-container>
+                    <label>Weight Metric:</label>
+                    <select clrSelect id="select-food-metric" name="foodMetric" [(ngModel)]="record.foodMetric" (change)="onWeightMetricChange()" required>
+                        <option *ngFor="let metric of foodMetricsList" value="metric">
+                            {{ metric }}
+                        </option>
+                    </select>
+                </clr-select-container>
+
+                <clr-input-container>
+                    <label>Your Name:</label>
+                    <input clrInput name="createdBy" [(ngModel)]="record.createdBy" (keyup)="onNameChange()" #createdBy="ngModel" required/>
+                    <clr-control-helper>
+                        <ng-container *ngIf="!validName && (createdBy.dirty || createdBy.touched)"><span style="color: red;">Please input a valid name, the name may only contain letters</span></ng-container>
+                    </clr-control-helper>
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Code (4 characters):</label>
+                    <input clrInput name="code" type="password" min="4" [(ngModel)]="record.code" (keyup)="onCodeChange()" #code="ngModel" required/>
+                    <clr-control-helper>
+                        <ng-container *ngIf="!validCode && (code.dirty || code.touched)"><span style="color: red;">Please input a valid code, the code may only contain letters and numbers, 4 characters long</span></ng-container>
+                    </clr-control-helper>
+                </clr-input-container>
+            </form>
+
+            <div>
+                <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="submit()" [disabled]="!validRecord"><span class="btn-font">Submit</span></button>
+            </div>
+
+            <ng-container *ngIf="submitting">
+                <div class="progress loop">
+                    <progress></progress>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="successfulSubmitted">
+                <div class="label-font">
+                    Record Submitted Successfully!
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+
+
+</div>

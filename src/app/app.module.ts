@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { DescriptionComponent } from './views/description/description.component';
 import { RecordComponent } from './views/record/record.component';
 import { SummaryComponent } from './views/summary/summary.component';
+import { ClarityModule } from '@clr/angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SummaryComponent } from './views/summary/summary.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ClarityModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

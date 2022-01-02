@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+.main-container{
+    height: 800px;
+    width: 1300px;
+    background-color: white;
+}
 
 .sub-page-title{
     text-align: center;
@@ -54,4 +59,42 @@
     position:fixed;
     bottom:10px;
     width:100%;
+}
+
+.box-inline{
+    margin: 1rem;
+    padding: 2rem 2rem;
+}
+
+.left-section{
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    width: 55%;
+    /* border: 1px black solid; */
+}
+
+.right-section{
+    display: inline-block;
+    /* padding: 1rem 1rem; */
+    vertical-align: middle;
+    width: 40%;
+    /* border: 1px black solid; */
+}
+
+.map{
+    width: 100%;
+    height: 50vh;
+}
+
+.label-font{
+    font-size: large;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.btn-font{
+    font-size: large;
+    font-weight: 400;
+    font-size: 12px;
 }
