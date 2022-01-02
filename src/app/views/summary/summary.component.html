@@ -1,1 +1,94 @@
-<p>summary works!</p>
+<div class="main-content">
+    <div class="label-font" style="text-align: center;margin-bottom: 50px;font-weight: bold;">
+        Summary
+    </div>
+    <div class="label-font">
+        Records
+    </div>
+    <div class="data-grid">
+        <clr-datagrid [(clrDgSingleSelected)]="selectedRecord" (clrDgSingleSelectedChange)="onRecordChange($event)">
+            <clr-dg-column [clrDgField]="'location'">Location</clr-dg-column>
+            <clr-dg-column [clrDgField]="'duckType'">Duck Type</clr-dg-column>
+            <clr-dg-column [clrDgField]="'duckAmount'">Duck Amount</clr-dg-column>
+            <clr-dg-column [clrDgField]="'food'">Food</clr-dg-column>
+            <clr-dg-column [clrDgField]="'foodAmount'">Food Amount</clr-dg-column>
+            <clr-dg-column [clrDgField]="'foodMetric'">Weight Metric</clr-dg-column>
+            <clr-dg-column [clrDgField]="'createdBy'">Created By</clr-dg-column>
+            <clr-dg-column [clrDgField]="'createdOn'">Creation Date</clr-dg-column>
+            <clr-dg-column [clrDgField]="'updatedOn'">Update Date</clr-dg-column>
+          
+            <clr-dg-row *clrDgItems="let record of records" [clrDgItem]="record">
+              <clr-dg-cell>{{record.location}}</clr-dg-cell>
+              <clr-dg-cell>{{record.duckType}}</clr-dg-cell>
+              <clr-dg-cell>{{record.duckAmount}}</clr-dg-cell>
+              <clr-dg-cell>{{record.food}}</clr-dg-cell>
+              <clr-dg-cell>{{record.foodAmount}}</clr-dg-cell>
+              <clr-dg-cell>{{record.foodMetric}}</clr-dg-cell>
+              <clr-dg-cell>{{record.createdBy}}</clr-dg-cell>
+              <clr-dg-cell>{{record.createdOn | date:'medium'}}</clr-dg-cell>
+              <clr-dg-cell>{{record.updatedOn | date:'medium'}}</clr-dg-cell>
+            </clr-dg-row>
+          
+            <clr-dg-footer>{{records.length}} records</clr-dg-footer>
+        </clr-datagrid>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="openModal()" [disabled]="selectedRecord == null"><span class="btn-font">Update</span></button>
+    </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="openUpdateModal" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Update Record</h3>
+    <div class="modal-body">
+        <form clrForm clrLabelSize="4">
+            <clr-input-container>
+                <label>Location:</label>
+                <input clrInput name="location" [(ngModel)]="selectedRecord.location" (change)="onLocationChange()" required/>
+            </clr-input-container>
+
+            <clr-select-container>
+                <label>Duck Type:</label>
+                <select clrSelect id="select-duck-type" name="duckType" [(ngModel)]="selectedRecord.duckType" (change)="onDuckTypeChange()" required>
+                    <option *ngFor="let type of duckTypeList" [value]="type">
+                        {{ type }}
+                    </option>
+                </select>
+            </clr-select-container>
+
+            <clr-input-container>
+                <label>Duck Amount:</label>
+                <input clrInput name="duckAmount" type="number" [(ngModel)]="selectedRecord.duckAmount" (change)="onDuckAmountChange()" required/>
+            </clr-input-container>
+
+            <clr-input-container>
+                <label>Food Description:</label>
+                <input clrInput name="food" size="50" [(ngModel)]="selectedRecord.food" (change)="onFoodDescriptionChange()" required/>
+            </clr-input-container>
+
+            <clr-input-container>
+                <label>Food Amount:</label>
+                <input clrInput name="foodAmount" type="number" [(ngModel)]="selectedRecord.foodAmount" (change)="onFoodAmountChange()" required/>
+            </clr-input-container>
+
+            <clr-select-container>
+                <label>Weight Metric:</label>
+                <select clrSelect id="select-food-metric" name="foodMetric" [(ngModel)]="selectedRecord.foodMetric" (change)="onWeightMetricChange()" required>
+                    <option *ngFor="let metric of foodMetricsList" [value]="metric">
+                        {{ metric }}
+                    </option>
+                </select>
+            </clr-select-container>
+
+            <clr-input-container>
+                <label>Verification Code:</label>
+                <input clrInput name="code" type="password" min="4" [(ngModel)]="selectedRecord.code" required/>
+            </clr-input-container>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="openUpdateModal = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="updateRecord()" [disabled]="!validRecord">Update</button>
+    </div>
+</clr-modal>

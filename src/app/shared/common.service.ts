@@ -144,4 +144,11 @@ export class CommonService {
   ]
 
   foodMetricsList: string[] = ["kg", "g", "lb", "oz"]
+
+}
+
+export interface ResponseDuck<T>{
+  isSuccess: boolean;
+  message: string;
+  result: T;
 }

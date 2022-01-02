@@ -55,7 +55,7 @@
                 <clr-select-container>
                     <label>Weight Metric:</label>
                     <select clrSelect id="select-food-metric" name="foodMetric" [(ngModel)]="record.foodMetric" (change)="onWeightMetricChange()" required>
-                        <option *ngFor="let metric of foodMetricsList" value="metric">
+                        <option *ngFor="let metric of foodMetricsList" [value]="metric">
                             {{ metric }}
                         </option>
                     </select>

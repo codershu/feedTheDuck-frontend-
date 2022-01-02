@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { duckRecord } from 'src/app/models/commonModels';
-import { CommonService } from 'src/app/shared/common.service';
+import { DuckServiceService } from 'src/app/services/duck-service.service';
+import { CommonService, ResponseDuck } from 'src/app/shared/common.service';
 declare const google: any;
 
 @Component({
@@ -31,7 +32,7 @@ export class RecordComponent implements OnInit, AfterViewInit {
   validName: boolean = false;
 
 
-  constructor(private common: CommonService) { 
+  constructor(private common: CommonService, private duckService: DuckServiceService) { 
     this.record = new duckRecord();
   }
 
@@ -182,7 +183,18 @@ export class RecordComponent implements OnInit, AfterViewInit {
   }
 
   submit(){
-
+    this.duckService.addRecord(this.record).subscribe(
+      response => this.onGetResponse(response))
   }
 
+  onGetResponse(response: any){
+    console.log(response)
+    if(response && response.body && response.body.isSuccess){
+      console.log("success for adding new record")
+    }else{
+      console.log("error when add new record")
+    }
+  }
 }
+
+
