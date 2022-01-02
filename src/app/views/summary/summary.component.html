@@ -35,7 +35,9 @@
 
     <div>
         <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="openModal()" [disabled]="selectedRecord == null"><span class="btn-font">Update</span></button>
+        <button class="btn btn-warning" style="margin-top: 10px; font-size: medium;" (click)="openDeletionModal()" [disabled]="selectedRecord == null"><span class="btn-font">Delete</span></button>
     </div>
+
 </div>
 
 <clr-modal [(clrModalOpen)]="openUpdateModal" [clrModalSize]="'lg'">
@@ -90,5 +92,22 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-link" (click)="openUpdateModal = false">Cancel</button>
         <button type="button" class="btn btn-primary" (click)="updateRecord()" [disabled]="!validRecord">Update</button>
+    </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="openDeleteModal" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Delete Record</h3>
+    <div class="modal-body">
+        You are going to delete the selected record, are you sure you want to delete it?
+        <form clrForm clrLabelSize="4">
+            <clr-input-container>
+                <label>Verification Code:</label>
+                <input clrInput name="code" type="password" min="4" [(ngModel)]="selectedRecord.code" required/>
+            </clr-input-container>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-link" (click)="openDeleteModal = false">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="deleteRecord()">Delete</button>
     </div>
 </clr-modal>

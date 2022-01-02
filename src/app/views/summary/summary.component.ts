@@ -17,6 +17,7 @@ export class SummaryComponent implements OnInit {
   duckTypeList: string[] = [];
   foodMetricsList: string[] = [];
   updatedRecord: duckRecord;
+  openDeleteModal: boolean = false;
 
   constructor(private common: CommonService, private duckService: DuckServiceService) { 
     this.updatedRecord = new duckRecord();
@@ -107,15 +108,37 @@ export class SummaryComponent implements OnInit {
   updateRecord(){
     // console.log("updated ", this.selectedRecord)
     this.duckService.updateRecord(this.selectedRecord).subscribe(response => {
-      if(response) this.onGetResponse(response)
+      if(response) this.onGetUpdateResponse(response)
     })
   }
 
-  onGetResponse(response: any){
+  onGetUpdateResponse(response: any){
     console.log("update response", response)
     if(response && response.isSuccess){
       // console.log(response.body.message)
       this.openUpdateModal = false;
+      this.getRecords();
+    }else{
+      console.log(response.message)
+    }
+  }
+
+  openDeletionModal(){
+    this.openDeleteModal = true;
+  }
+
+  deleteRecord(){
+    this.duckService.deleteRecord(this.selectedRecord).subscribe(response => {
+      if(response) this.onGetDeleteResponse(response)
+    })
+  }
+
+  onGetDeleteResponse(response: any){
+    console.log("delete response", response)
+    if(response && response.isSuccess){
+      // console.log(response.body.message)
+      this.openDeleteModal = false;
+      this.getRecords();
     }else{
       console.log(response.message)
     }

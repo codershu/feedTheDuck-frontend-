@@ -26,7 +26,8 @@ export class DuckServiceService {
     return this.http.post<any>(`${this.apiRoute}/UpdateRecord`, record, {headers: httpHeaders});
   }
 
-  public getBlobs(){
-    return this.http.get<any>(`${this.apiRoute}/getBlobs`);
+  public deleteRecord(record: duckRecord){
+    const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiRoute}/DeleteRecord`, record, {headers: httpHeaders});
   }
 }
