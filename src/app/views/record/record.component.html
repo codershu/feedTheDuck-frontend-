@@ -39,7 +39,7 @@
 
                 <clr-input-container>
                     <label>Duck Amount:</label>
-                    <input clrInput name="duckAmount" type="number" [(ngModel)]="record.duckAmount" (change)="onDuckAmountChange()" [ngModelOptions]="{standalone: true}" required/>
+                    <input clrInput name="duckAmount" type="number" min="0" [(ngModel)]="record.duckAmount" (change)="onDuckAmountChange()" [ngModelOptions]="{standalone: true}" required/>
                 </clr-input-container>
 
                 <clr-input-container>
@@ -49,7 +49,7 @@
 
                 <clr-input-container>
                     <label>Food Amount:</label>
-                    <input clrInput name="foodAmount" type="number" [(ngModel)]="record.foodAmount" (change)="onFoodAmountChange()" [ngModelOptions]="{standalone: true}" required/>
+                    <input clrInput name="foodAmount" type="number" min="0" [(ngModel)]="record.foodAmount" (change)="onFoodAmountChange()" [ngModelOptions]="{standalone: true}" required/>
                 </clr-input-container>
 
                 <clr-select-container>
