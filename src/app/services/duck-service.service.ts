@@ -9,8 +9,8 @@ export class DuckServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private apiRoute = "https://localhost:5001/duck";
-  // private apiRoute = "https://feedtheduck-server.azurewebsites.net/duck";
+  // private apiRoute = "https://localhost:5001/duck";
+  private apiRoute = "https://feedtheduck-server.azurewebsites.net/duck";
 
   public addRecord(record: duckRecord){
     const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

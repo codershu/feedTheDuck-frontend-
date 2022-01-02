@@ -123,7 +123,7 @@ export class SummaryComponent implements OnInit {
   }
 
   onGetUpdateResponse(response: any){
-    console.log("update response", response)
+    // console.log("update response", response)
     if(response && response.isSuccess){
       // console.log(response.body.message)
       this.openUpdateModal = false;
@@ -147,7 +147,7 @@ export class SummaryComponent implements OnInit {
   }
 
   onGetDeleteResponse(response: any){
-    console.log("delete response", response)
+    // console.log("delete response", response)
     if(response && response.isSuccess){
       // console.log(response.message)
       this.openDeleteModal = false;
