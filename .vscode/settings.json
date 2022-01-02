@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/235a99d7-eff6-47d2-a19a-84fe670b3f22/resourceGroups/feedTheDuck-web-rg/providers/Microsoft.Web/sites/FeedTheDuck",
+    "appService.deploySubpath": "dist/feedTheDuck"
+}

@@ -1,11 +1,12 @@
 <div class="main-content">
-    <div class="label-font" style="text-align: center;margin-bottom: 50px;font-weight: bold;">
+    <div class="sub-page-title" style="text-align: center;margin-bottom: 50px;font-weight: bold;">
         Summary
     </div>
     <div class="label-font">
         Records 
-        <button class="btn btn-primary" style="margin-left: 50px; font-size: medium;" (click)="refreshTable()"><span class="btn-font">Refresh <clr-icon shape="refresh"></clr-icon> </span></button>
+        <button class="btn btn-primary" style="margin-left: 20px; font-size: small;" (click)="refreshTable()"><span class="btn-font">Refresh <clr-icon shape="refresh"></clr-icon> </span></button>
     </div>
+    <div class="spacer"></div>
     <div class="data-grid">
         <clr-datagrid [(clrDgSingleSelected)]="selectedRecord" (clrDgSingleSelectedChange)="onRecordChange($event)">
             <clr-dg-column [clrDgField]="'location'">Location</clr-dg-column>
@@ -33,7 +34,7 @@
             <clr-dg-footer>{{records.length}} records</clr-dg-footer>
         </clr-datagrid>
     </div>
-
+    <div class="spacer"></div>
     <div>
         <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="openModal()" [disabled]="selectedRecord == null"><span class="btn-font">Update</span></button>
         <button class="btn btn-warning" style="margin-top: 10px; font-size: medium;" (click)="openDeletionModal()" [disabled]="selectedRecord == null"><span class="btn-font">Delete</span></button>
