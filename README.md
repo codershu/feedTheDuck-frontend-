@@ -5,13 +5,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Precondition
 
 @angular-devkit/architect       0.1102.17
+
 @angular-devkit/build-angular   0.1102.17
+
 @angular-devkit/core            11.2.17
+
 @angular-devkit/schematics      11.2.17
+
 @angular/cli                    11.2.17
+
 @schematics/angular             11.2.17
+
 @schematics/update              0.1102.17
+
 rxjs                            6.6.7
+
 typescript                      4.1.6
 
 The backend server can be found at https://github.com/codershu/feedTheDuck-backend.git
