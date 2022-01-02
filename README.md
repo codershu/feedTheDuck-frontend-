@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Precondition
 
-The backend server can be found at https://github.com/codershu/feedTheDuck-backend.git![image](https://user-images.githubusercontent.com/44121753/147892521-45614358-944d-4a8e-8cf9-0d194538f57b.png)
+The backend server can be found at https://github.com/codershu/feedTheDuck-backend.git
 
 ## Development server
 
