@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.sub-page-title{
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.project-title{
+    font-size: 24px;
+}
+
+.nav-sub-title{
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.member{
+    margin-left: 50px;
+}
+
+.font-size-20{
+    font-size: 20px;
+}
+
+.font-size-22{
+    font-size: 22px;
+}
+
+.font-size-24{
+    font-size: 24px;
+}
+
+.font-size-26{
+    font-size: 26px;
+}
+
+.font-size-28{
+    font-size: 28px;
+}
+
+.font-bold{
+    font-weight: bold;
+}
+
+.spacer {
+    margin-top: 20px;
+}
+
+.fixed-footer{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+}
