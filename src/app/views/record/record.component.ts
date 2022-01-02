@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { duckRecord } from 'src/app/models/commonModels';
 import { DuckServiceService } from 'src/app/services/duck-service.service';
 import { CommonService, ResponseDuck } from 'src/app/shared/common.service';
@@ -30,7 +31,11 @@ export class RecordComponent implements OnInit, AfterViewInit {
   validRecord: boolean = false;
   validCode: boolean = false;
   validName: boolean = false;
+  resultMessage: string = "";
 
+  recordForm = new FormGroup({
+    sample: new FormControl('', Validators.required),
+  });
 
   constructor(private common: CommonService, private duckService: DuckServiceService) { 
     this.record = new duckRecord();
@@ -40,6 +45,10 @@ export class RecordComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.initialForm();
+  }
+
+  initialForm(){
     this.duckTypeList = this.common.duckTypeList;
     this.foodMetricsList = this.common.foodMetricsList;
     this.record.duckType = this.duckTypeList[0];
@@ -132,6 +141,7 @@ export class RecordComponent implements OnInit, AfterViewInit {
   }
 
   validateCode(){
+    this.successfulSubmitted = false;
     if(this.record.code == null || this.record.code.length != 4){
       this.validCode = false;
     }else{
@@ -183,17 +193,38 @@ export class RecordComponent implements OnInit, AfterViewInit {
   }
 
   submit(){
+    this.submitting = true;
+    // console.log(this.record)
     this.duckService.addRecord(this.record).subscribe(
-      response => this.onGetResponse(response))
+      response => this.onGetResponse(response),
+      error => {
+        this.submitting = false;
+        // console.log(error);
+        this.resultMessage = error;
+      })
   }
 
   onGetResponse(response: any){
     console.log(response)
-    if(response && response.body && response.body.isSuccess){
-      console.log("success for adding new record")
+    this.submitting = false;
+    if(response && response.isSuccess){
+      // console.log(response.message)
+      this.resultMessage = "You have successfully added a new record, thank you!";
+      this.successfulSubmitted = true;
+      this.resetForm();
+      this.initialForm();
     }else{
-      console.log("error when add new record")
+      // console.log(response.message)
+      this.resultMessage = "Oops, there is an error when submitting new record.";
     }
+  }
+
+  resetForm(){
+    this.record = new duckRecord();
+    this.validRecord = false;
+    this.validCode = false;
+    this.validName = false;
+    this.recordForm.reset();
   }
 }
 

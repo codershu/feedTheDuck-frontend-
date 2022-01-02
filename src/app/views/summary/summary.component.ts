@@ -18,6 +18,10 @@ export class SummaryComponent implements OnInit {
   foodMetricsList: string[] = [];
   updatedRecord: duckRecord;
   openDeleteModal: boolean = false;
+  deleteError: string = "";
+  deleteSuccessMessage: string = "";
+  updateError: string = "";
+  updateSuccessMessage: string = "";
 
   constructor(private common: CommonService, private duckService: DuckServiceService) { 
     this.updatedRecord = new duckRecord();
@@ -40,11 +44,16 @@ export class SummaryComponent implements OnInit {
     })
   }
 
+  refreshTable(){
+    this.getRecords();
+  }
+
   onRecordChange(event: any){
   }
 
   openModal(){
     this.openUpdateModal = true;
+    this.resetAllMessage();
   }
 
   onLocationChange(){
@@ -109,7 +118,8 @@ export class SummaryComponent implements OnInit {
     // console.log("updated ", this.selectedRecord)
     this.duckService.updateRecord(this.selectedRecord).subscribe(response => {
       if(response) this.onGetUpdateResponse(response)
-    })
+    },
+    error => this.updateError = JSON.stringify(error))
   }
 
   onGetUpdateResponse(response: any){
@@ -117,9 +127,11 @@ export class SummaryComponent implements OnInit {
     if(response && response.isSuccess){
       // console.log(response.body.message)
       this.openUpdateModal = false;
+      this.updateSuccessMessage = response.message;
       this.getRecords();
     }else{
-      console.log(response.message)
+      this.updateError = response.message;
+      // console.log(response.message)
     }
   }
 
@@ -130,18 +142,28 @@ export class SummaryComponent implements OnInit {
   deleteRecord(){
     this.duckService.deleteRecord(this.selectedRecord).subscribe(response => {
       if(response) this.onGetDeleteResponse(response)
-    })
+    },
+    error => this.deleteError = JSON.stringify(error))
   }
 
   onGetDeleteResponse(response: any){
     console.log("delete response", response)
     if(response && response.isSuccess){
-      // console.log(response.body.message)
+      // console.log(response.message)
       this.openDeleteModal = false;
+      this.deleteSuccessMessage = response.message;
       this.getRecords();
     }else{
-      console.log(response.message)
+      this.deleteError = response.message;
+      // console.log(response.message)
     }
+  }
+
+  resetAllMessage(){
+    this.deleteSuccessMessage = "";
+    this.deleteError = "";
+    this.updateSuccessMessage = "";
+    this.updateError = "";
   }
 
 }

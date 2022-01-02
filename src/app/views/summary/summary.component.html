@@ -3,7 +3,8 @@
         Summary
     </div>
     <div class="label-font">
-        Records
+        Records 
+        <button class="btn btn-primary" style="margin-left: 50px; font-size: medium;" (click)="refreshTable()"><span class="btn-font">Refresh <clr-icon shape="refresh"></clr-icon> </span></button>
     </div>
     <div class="data-grid">
         <clr-datagrid [(clrDgSingleSelected)]="selectedRecord" (clrDgSingleSelectedChange)="onRecordChange($event)">
@@ -36,6 +37,8 @@
     <div>
         <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="openModal()" [disabled]="selectedRecord == null"><span class="btn-font">Update</span></button>
         <button class="btn btn-warning" style="margin-top: 10px; font-size: medium;" (click)="openDeletionModal()" [disabled]="selectedRecord == null"><span class="btn-font">Delete</span></button>
+        <ng-container *ngIf="deleteSuccessMessage != ''">{{ deleteSuccessMessage }}</ng-container>
+        <ng-container *ngIf="updateSuccessMessage != ''">{{ updateSuccessMessage }}</ng-container>
     </div>
 
 </div>
@@ -90,6 +93,9 @@
         </form>
     </div>
     <div class="modal-footer">
+        <ng-container *ngIf="updateError != ''">
+            {{ updateError }}
+        </ng-container>
         <button type="button" class="btn btn-link" (click)="openUpdateModal = false">Cancel</button>
         <button type="button" class="btn btn-primary" (click)="updateRecord()" [disabled]="!validRecord">Update</button>
     </div>
@@ -107,6 +113,9 @@
         </form>
     </div>
     <div class="modal-footer">
+        <ng-container *ngIf="deleteError != ''">
+            {{ deleteError }}
+        </ng-container>
         <button type="button" class="btn btn-link" (click)="openDeleteModal = false">Cancel</button>
         <button type="button" class="btn btn-warning" (click)="deleteRecord()">Delete</button>
     </div>
