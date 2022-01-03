@@ -22,6 +22,7 @@ export class SummaryComponent implements OnInit {
   deleteSuccessMessage: string = "";
   updateError: string = "";
   updateSuccessMessage: string = "";
+  loadingRecords: boolean = false;
 
   constructor(private common: CommonService, private duckService: DuckServiceService) { 
     this.updatedRecord = new duckRecord();
@@ -35,9 +36,11 @@ export class SummaryComponent implements OnInit {
   }
 
   getRecords(){
+    this.loadingRecords = true;
     this.duckService.getAllRecords().subscribe(response => {
       if(response && response.isSuccess){
         // console.log("all records", response.result)
+        this.loadingRecords = false;
         this.records = response.result;
         this.selectedRecord = this.records[0];
       }
